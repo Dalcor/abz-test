@@ -1,0 +1,84 @@
+<main class="container">
+    <section class="main-banner">
+        <div class="grid-area">
+        <img src="../../assets/images/banner.jpg" 
+        class="main-banner-img" alt="main-banner-img">
+        <div class="title-holder"><h1>TEST  ASSIGNMENT <br> FOR FRONTEND
+             <br> DEVELOPER POSITION</h1></div>
+        <div class="text-holder"><span>We kindly remind you that your test assignment should be submitted
+             as a link to github/bitbucket repository. Please be patient, we consider
+              and respond to every application that meets
+               minimum requirements. We look forward
+             to your submission. Good luck! The photo has to scale in
+              the banner area on the different screens</span></div>
+        <div class="button-holder"><button class="banner-btn">Sing up now</button></div>
+    </div>
+    </section>
+    <section class="requirerments">
+        <h1>Let's get acquainted</h1>
+        <div class="req-content">
+        <img src="../../assets/images/cool.png" alt="">
+        <div class="text">
+            <h2>I am cool frontend developer</h2>
+            <p>We will evaluate how clean your approach to writing CSS and Javascript
+                    code is. You can use any CSS and Javascript
+                    3rd party libraries without any restriction.</p>
+            <p>If 3rd party css/javascript libraries are added to the project via bower/npm/yarn
+                    you will get bonus points. If you use any task runner (gulp/webpack) you will get
+                    bonus points as well. Slice service directory page P​SD mockup​ into HTML5/CSS3. </p>  
+          <div class="link-holder"><a href="#">Sing up now</a></div>
+        </div>
+        </div>
+    </section>
+    <section class="users">
+        <h1>Our cheerful users</h1>
+        <p>Attention! Sorting users by registration date</p>
+        <div *ngIf="users" class="users-container">
+            <div *ngFor="let user of users | sortBy:'desc':'registration_timestamp'" class="user-card">
+                <div class="user">
+                <img src="{{user.photo}}" alt="">
+                    <p class="name">{{user.name}}</p>
+                    <p class="position">{{user.position}}</p>
+                    <a class="email" href="mailto:yourmail@mysite.com">{{user.email}}</a>
+                    <a class="phone" href="tel:+380952457317">{{user.phone}}</a>
+                </div>
+            </div>
+        </div>
+        <div class="btn-holder"><button (click)="showMore()">Show more</button></div>
+    </section>
+    <section class="register">
+        <h1>Register to get a work</h1>
+        <p>Attention! After successful registration and alert, update 
+             the <br> list of users in the block from the top</p>
+        <div class="form-holder">
+            <form novalidate [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+                <label for="name">Name</label>
+                <input formControlName="name" name="name" id="name" placeholder="Your name" type="text">
+                <label for="email">Email</label>
+                <input formControlName="email" name="email" id="email" placeholder="Your email" type="email">
+                <label for="phone">Phone number</label>
+                <input formControlName="phone" name="phone" id="phone" placeholder="+380 XX XXX XX XX" type="text">
+                <span>Enter phone number in open format</span>
+                
+                <label class="position-label" for="pos">Select your position</label>
+                <div><input formControlName="position" value="front" name="position" checked="true" id="front" type="radio"><label for="front">Frontend developer</label></div>
+                <div><input formControlName="position" value="back" name="position" id="back" type="radio"><label for="back">Backend developer</label></div>
+                <div><input formControlName="position" value="design" name="position" id="design" type="radio"><label for="design">Designer</label></div>
+                <div><input formControlName="position" value="QA" name="position" id="QA" type="radio"><label for="QA">QA</label></div>
+
+                <p class="photoTitle">Photo</p>
+
+                <div class="formPhotoHolder">
+                <div *ngIf="c" class="field">{{c}}</div>
+                <div *ngIf="!c" class="field">Upload your photo</div>
+                    <input type="file"
+                            id="file"
+                            (change)="handleFileInput($event)"
+                            class="inputfile">
+                <label for="file">Browse</label>
+                </div>
+                <div class="sub-btn-holder"><button class="submit" type="submit">Sing up now</button></div>
+            </form>
+        </div>
+    </section>
+</main>

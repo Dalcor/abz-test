@@ -1,0 +1,52 @@
+@import "../../variables.scss";
+
+header {
+    display: flex;
+    justify-content: space-between;
+    background-color: $bg-color-1;
+    height: 60px;
+    align-items: center;
+    .logo-container {
+        display: flex;
+        justify-items: flex-start;
+        margin-left: 29px;
+        
+        .shape {
+            background-image: url('../../assets/images/Shape4.svg');
+            width: 30px;
+            height: 20px;
+            background-repeat: no-repeat;
+            background-position: 0 1px;
+            background-size: 30px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $bg-color-1;
+            margin-right: 10px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+        span {
+            letter-spacing: 3.1px;
+        }
+    }
+
+    ul {
+        display: flex;
+        list-style: none;
+        margin-right: 15px;
+        li {
+            margin: 0 14px;
+        }
+        li:nth-child(-n+2),
+        li:nth-last-child(2) {
+            margin: 0 15px 0 14px;
+        } 
+        a {
+            font-size: 14px;
+            color: #000;
+            text-decoration: none;
+        }
+        
+    }
+}

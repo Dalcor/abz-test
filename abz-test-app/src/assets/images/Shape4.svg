@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="20" viewBox="0 0 30 20">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #1b4a8a;
+        fill-rule: evenodd;
+      }
+    </style>
+  </defs>
+  <path class="cls-1" d="M37,20L30,30l7,10H53l7-10L53,20H37Z" transform="translate(-30 -20)"/>
+</svg>
