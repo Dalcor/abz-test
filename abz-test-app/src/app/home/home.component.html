@@ -1,3 +1,11 @@
+<div *ngIf="modal" (click)="closeModal()" class="success"> <!--  -->
+    <div class="modal">
+        <div class="v-center"><p>Congratulations!</p></div>
+        <div class="v-center"><span class="pass">You have successfully passed the registration</span></div>
+        <button (click)="closeModal()" class="close"><img src="../../assets/images/cross.svg" alt=""></button>
+        <div class="v-bottom"><button (click)="closeModal()" class="agree">Great</button></div>
+    </div>
+</div>
 <main class="container">
     <section class="main-banner">
         <div class="grid-area">
@@ -6,11 +14,11 @@
         <div class="title-holder"><h1>TEST  ASSIGNMENT <br> FOR FRONTEND
              <br> DEVELOPER POSITION</h1></div>
         <div class="text-holder"><span>We kindly remind you that your test assignment should be submitted
-             as a link to github/bitbucket repository. Please be patient, we consider
+             as a link to github/bitbucket repository.<span class="desktop-visible"> Please be patient, we consider
               and respond to every application that meets
                minimum requirements. We look forward
              to your submission. Good luck! The photo has to scale in
-              the banner area on the different screens</span></div>
+              the banner area on the different screens</span> </span></div>
         <div class="button-holder"><button class="banner-btn">Sing up now</button></div>
     </div>
     </section>
@@ -23,10 +31,10 @@
             <p>We will evaluate how clean your approach to writing CSS and Javascript
                     code is. You can use any CSS and Javascript
                     3rd party libraries without any restriction.</p>
-            <p>If 3rd party css/javascript libraries are added to the project via bower/npm/yarn
+            <p class="ws">If 3rd party css/javascript libraries are added to the project via bower/npm/yarn
                     you will get bonus points. If you use any task runner (gulp/webpack) you will get
                     bonus points as well. Slice service directory page P​SD mockup​ into HTML5/CSS3. </p>  
-          <div class="link-holder"><a href="#">Sing up now</a></div>
+          <div class="link-holder"><button>Sing up now</button></div>
         </div>
         </div>
     </section>
@@ -37,14 +45,17 @@
             <div *ngFor="let user of users | sortBy:'desc':'registration_timestamp'" class="user-card">
                 <div class="user">
                 <img src="{{user.photo}}" alt="">
-                    <p class="name">{{user.name}}</p>
+                    <p class="name">{{user.name}}</p>           
                     <p class="position">{{user.position}}</p>
                     <a class="email" href="mailto:yourmail@mysite.com">{{user.email}}</a>
+                    <div class="tooltip-holder">
+                        <div class="tooltip-email">{{user.email}}</div>
+                    </div>
                     <a class="phone" href="tel:+380952457317">{{user.phone}}</a>
                 </div>
             </div>
         </div>
-        <div class="btn-holder"><button (click)="showMore()">Show more</button></div>
+        <div *ngIf="showButton" class="btn-holder"><button (click)="showMore($event)">Show more</button></div>
     </section>
     <section class="register">
         <h1>Register to get a work</h1>
@@ -53,31 +64,61 @@
         <div class="form-holder">
             <form novalidate [formGroup]="signInForm" (ngSubmit)="onSubmit()">
                 <label for="name">Name</label>
-                <input formControlName="name" name="name" id="name" placeholder="Your name" type="text">
+                <input [ngClass]="{ 'is-invalid':submitted && f.name.errors }" formControlName="name" name="name" id="name" placeholder="Your name" type="text">
+                    <div class="error-holder">
+                        <div *ngIf="submitted && f.name.errors" class="invalid-name">
+                            <div *ngIf="f.name.errors.required" class="required">Name is required</div>
+                            <div *ngIf="f.name.errors.maxlength" class="required">Name should be less than 60 characters</div>
+                            <div *ngIf="f.name.errors.minlength" class="required">Name should be more than 1 character</div>
+                        </div>
+                    </div>
                 <label for="email">Email</label>
-                <input formControlName="email" name="email" id="email" placeholder="Your email" type="email">
+                <input [ngClass]="{ 'is-invalid':submitted && f.email.errors }" formControlName="email" name="email" id="email" placeholder="Your email" type="email">
+                <div class="error-holder">
+                    <div *ngIf="submitted && f.email.errors" class="invalid-name">
+                        <div *ngIf="f.email.errors.required" class="required">Email is required</div>
+                        <div *ngIf="f.email.errors.email" class="required">Email have incorrect format</div>
+                    </div>
+                </div>
                 <label for="phone">Phone number</label>
-                <input formControlName="phone" name="phone" id="phone" placeholder="+380 XX XXX XX XX" type="text">
-                <span>Enter phone number in open format</span>
+                <input [ngClass]="{ 'is-invalid':submitted && f.phone.errors }" formControlName="phone" name="phone" id="phone" pattern="^[\+]{0,1}380([0-9]{9})$" placeholder="+380 XX XXX XX XX" type="text">
+                <div class="error-holder-phone">
+                    <div *ngIf="submitted && f.phone.errors" class="invalid-name-phone">
+                        <div *ngIf="f.phone.errors.required" class="required">Phone is required</div>
+                        <div *ngIf="f.phone.errors.pattern" class="required">Phone should contains only '0-9' numerals, starts with '+380' and consist of 10 numbers</div>
+                    </div>
+                </div>
+                <span *ngIf="!submitted || !f.phone.errors">Enter phone number in open format</span>
                 
                 <label class="position-label" for="pos">Select your position</label>
-                <div><input formControlName="position" value="front" name="position" checked="true" id="front" type="radio"><label for="front">Frontend developer</label></div>
+                <ng-container *ngIf="positions">
+                <div *ngFor="let position of positions">
+                    <input formControlName="position_id" value="{{position.id}}" name="position_id" id="{{position.id}}" type="radio"><label for="{{position.id}}">{{position.name}}</label>
+                </div>
+                </ng-container>
+                <!-- <div><input formControlName="position" value="front" name="position" checked="true" id="front" type="radio"><label for="front">Frontend developer</label></div>
                 <div><input formControlName="position" value="back" name="position" id="back" type="radio"><label for="back">Backend developer</label></div>
                 <div><input formControlName="position" value="design" name="position" id="design" type="radio"><label for="design">Designer</label></div>
-                <div><input formControlName="position" value="QA" name="position" id="QA" type="radio"><label for="QA">QA</label></div>
-
+                <div><input formControlName="position" value="QA" name="position" id="QA" type="radio"><label for="QA">QA</label></div> -->
+            
                 <p class="photoTitle">Photo</p>
 
                 <div class="formPhotoHolder">
-                <div *ngIf="c" class="field">{{c}}</div>
-                <div *ngIf="!c" class="field">Upload your photo</div>
-                    <input type="file"
+                <div [ngClass]="{'is-invalid-photo-field1':submitted && f.photo.errors }" *ngIf="c" class="field choosed">{{c}}</div>
+                <div [ngClass]="{'is-invalid-photo-field1':submitted && f.photo.errors }" *ngIf="!c" class="field">Upload your photo</div>
+                    <input formControlName="photo" name="photo" type="file"
                             id="file"
-                            (change)="handleFileInput($event)"
+                            (change)="handleFileInput($event)" (click)="handleClickInput($event)"
                             class="inputfile">
-                <label for="file">Browse</label>
+                <label [ngClass]="{'is-invalid-photo-field':submitted && f.photo.errors }" for="file">Browse</label>
                 </div>
-                <div class="sub-btn-holder"><button class="submit" type="submit">Sing up now</button></div>
+                <div class="error-holder">
+                    <div *ngIf="submitted && f.photo.errors" class="invalid-name">
+                        <div *ngIf="f.photo.errors.required" class="required">Photo is required</div>
+                        <div *ngIf="!f.photo.errors.required" class="required">Photo should be jpeg or jpg type and less than 5Mb</div>
+                    </div>
+                </div>
+                <div class="sub-btn-holder"><button  class="submit" type="submit">Sing up now</button></div>
             </form>
         </div>
     </section>

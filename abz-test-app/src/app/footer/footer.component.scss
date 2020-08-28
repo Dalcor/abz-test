@@ -2,7 +2,16 @@ footer {
     width: 100%;
     border-top: 1px solid #EDEDED;
     text-align: center;
+
     p {
         margin: 16px 0 17px 0;
+    }
+}
+
+@media screen and (max-width: 768px) { 
+    footer {
+        p {
+            padding-left: 9px;
+        }
     }
 }
