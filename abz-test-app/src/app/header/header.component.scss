@@ -1,9 +1,7 @@
  @import "../../variables.scss";
  
  
- header 
-
-{
+ header {
     position: fixed;
     top: 0;
     right: 50%;
@@ -32,6 +30,11 @@
             letter-spacing: 3.1px;
         }
     }
+
+    .button-holder {
+        display: none;
+    }
+
     .desktop {
         ul {
             display: flex;
@@ -59,20 +62,46 @@
     
 }
 
-@media screen and (max-width: 320px) { 
+// @keyframes slideOut {
+//     from {
+//         left: -80vw;
+//     }
+
+//     to {
+//         left: 0;
+//     }
+// }
+
+
+@media screen and (max-width: 768px) { 
    header {
        height: 40px;
+       .button-holder {
+        display: block;
+        margin-right: 7px;
+        padding-top: 1px;
+        button {
+            border: none;
+            background-color: transparent;    
+            }
+        }
+        .logo-container {
+            margin-left: 15px;
+        }
        .desktop {
            display: none;
        }
+       
        .mobile {
-           display: none;
+           display: block;
            width: 70vw;
            height: 100vh;
            position: absolute;
            top:0;
-           left: 0;
+           left: -100%;
            background-color: #fff;
+           transition-duration: 0.5s;
+           transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
            ul {
             display: flex;
             flex-direction: column;
@@ -92,6 +121,13 @@
             }
             
         }
+        
+        
        }
+       .opened {
+            left: 0;
+            transition-duration: 0.5s;
+            transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
    }
 }

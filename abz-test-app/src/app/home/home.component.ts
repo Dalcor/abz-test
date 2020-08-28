@@ -51,6 +51,9 @@ export class HomeComponent implements OnInit {
     }
 
   ngOnInit(): void {
+    if(window.document.documentElement.clientWidth < 600) {
+      this.count = 3;
+    }
     this.currentPage = 1;
     this.usersService.getUsers(this.currentPage, this.count)
     .subscribe(data => {this.users = data.users;
