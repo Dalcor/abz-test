@@ -1,5 +1,6 @@
 @import "../../variables.scss";
 
+ /*--------------------------BANNER SECTION STYLING-------------------------------*/
 
 .main-banner {
     margin-top: 60px;
@@ -9,7 +10,7 @@
         height: 600px;
         width: 100%;
         grid-template-columns: 40fr 717fr 560fr;
-        grid-template-rows: 127fr 200fr 23fr 109fr 41fr 183fr;
+        grid-template-rows: 127fr 200fr 23fr 109fr 41fr 183fr;//SET GRID SYSTEM FOR BANNER BLOCK
         position: relative;
     img {
         position: absolute;
@@ -69,6 +70,7 @@
     }
 }
 }
+ /*--------------------------2-ND SECTION STYLING-------------------------------*/
 
 .requirerments {
     margin-bottom: 155px;
@@ -82,7 +84,7 @@
 
     .req-content {
         display: grid;
-        grid-template-columns: 55fr 390fr 552fr 30fr;
+        grid-template-columns: 55fr 390fr 552fr 30fr;//SET GRID FOR REQUIREMENTS BLOCK
         margin-top: 71px;
         img {
             grid-column-start: 2;
@@ -125,6 +127,7 @@
     
 }
 
+ /*--------------------------USERS BLOCK STYLING-------------------------------*/
 
 .users {
     background-color: $bg-color-2;
@@ -209,7 +212,7 @@
                     color: #000;
                     margin: 0;
                     text-overflow: ellipsis;
-                    overflow: hidden; 
+                    overflow: hidden; //IF INFO IS MORE THAN SCROLL WIDTH - HIDE AND SHOW TOOLTIP
                 }
 
                 .email {
@@ -259,6 +262,9 @@
     }
    
 }
+ 
+
+ /*--------------------------REGISTER BLOCK STYLING-------------------------------*/
 
 .register {
     padding-top: 152px;
@@ -316,6 +322,7 @@
                 margin-top: 22px;
                 margin-bottom: 20px;
             }
+ /*--------------------------RADIO BUTTONS STYLING-------------------------------*/
 
             input[type=radio] {
                 position: absolute;
@@ -327,9 +334,15 @@
                 display: inline-flex;
                 align-items: center;
                 user-select: none;
-                margin-bottom: 11px;
                 font-weight: 600;
+                margin-bottom: 0;
               }
+
+              input[type=radio]+label+div{
+                margin-bottom: 11px;
+
+            }
+
               input[type=radio]+label::before {
                 content: '';
                 display: inline-block;
@@ -348,10 +361,16 @@
                 border-color: #0b76ef;
               }
 
-              input[type=radio]:checked+label::after {
+              input[type=radio]:checked+label+div {
+                  position: relative;
+
+              }
+
+              input[type=radio]:checked+label+div::before {
                 content: "";
                 position: absolute;
-                top: 50%;
+                top: -16px;
+                left: 5px;
                 width: 6px;
                 height: 6px;
                 flex-shrink: 0;
@@ -359,12 +378,13 @@
                 background-color: #fff;
                 border-radius: 50%;
                 margin-right: 9px;
-                transform: translate(80%, -50%);
-                -webkit-transform: translate(80%, -50%);
-                -moz-transform: translate(80%, -50%);
-                -ms-transform: translate(80%, -50%);
-                -o-transform: translate(80%, -50%);
+                // transform: translate(80%, -50%);
+                // -webkit-transform: translate(80%, -50%);
+                // -moz-transform: translate(80%, -50%);
+                // -ms-transform: translate(80%, -50%);
+                // -o-transform: translate(80%, -50%);
                }
+ /*--------------------------RADIO BUTTONS STYLING END-------------------------------*/
 
                .photoTitle {
                 margin: 0;
@@ -379,11 +399,11 @@
                 width: 0.1px;
                 height: 0.1px;
                 opacity: 0;
-                overflow: hidden;
+                overflow: hidden;//HIDE INPUT TYPE FILE TO STYLE IT
                 position: absolute;
                 z-index: -1;
                 }
-                .inputfile + label {
+                .inputfile + label {  //add label which will take button role
                     height: 38px;
                     font-size: 14px;
                     font-weight: 400;
@@ -423,7 +443,7 @@
                     display: flex;
                     width: 100%;
                     height: 43px;
-                    .field {
+                    .field {//create a field that imitate input
                         border:1px solid #D8D8D8;
                         border-radius: 4px 0 0 4px;
                         -webkit-border-radius: 4px 0 0 4px;
@@ -455,7 +475,6 @@
                 }
 
                 .submit {
-                    // font-family: "PT Sans", sans-serif;
                     margin-top: 10px;
                     width: 210px;
                     height: 39px;
@@ -478,6 +497,7 @@
         }
     }
 }
+ /*--------------------------FORM VALIDATION STYLING: ERROR STYLES-------------------------------*/
 
 .is-invalid,
 .is-invalid-photo-field {
@@ -513,6 +533,7 @@
     color: $error-color;
     font-size: 12px;
 }
+ /*--------------------------MODAL BLOCK STYLING-------------------------------*/
 
 .success {
     width: 100vw;
@@ -532,6 +553,7 @@
         height: 190px;
         border-radius: 5px;
         border: 1px solid #515050;
+        margin: 0 10px;
         // padding: 16px;
         .v-center {
             display: flex;
@@ -579,6 +601,7 @@
         }
     }
 }
+ /*--------------------------MEDIA QUERY FOR 1020PX, AS THIS WILL BE SHOWN 768PX WIDTH-------------------------------*/
 
 @media screen and (max-width: 1020px) {
     
@@ -593,7 +616,7 @@
             height: 492px;
             overflow-y: hidden;
             grid-template-columns: 68fr 1042fr 560fr;
-            grid-template-rows: 127fr 260fr 61fr 113fr 72fr 200fr;
+            grid-template-rows: 127fr 260fr 61fr 113fr 72fr 200fr;//RESET BANNER GRID SYSTEM
             .title-holder {
                 h1 {
                     letter-spacing: -1.2px;
@@ -650,6 +673,7 @@
 
 
 }
+ /*--------------------------MEDIA QUERY FOR LESS THAN 760PX WIDTH-------------------------------*/
 
 @media screen and (max-width: 760px) {
     
@@ -666,7 +690,8 @@
             height: 402px;
             overflow-y: hidden;
             grid-template-columns: 1fr;
-            grid-template-rows: 119fr 160fr 34fr 113fr 44fr 200fr;;
+            grid-template-rows: 119fr 160fr 34fr 113fr 44fr 200fr;
+            overflow: hidden;
             .desktop-visible {
                 display: none;
             }
@@ -690,7 +715,7 @@
         }
     }
     .requirerments {
-        margin-bottom: -12px;
+        margin-bottom: 0;
         h1 {
             letter-spacing: -0.4px;
         }
@@ -719,12 +744,14 @@
                 
             }
             .link-holder {
-                text-align: center;       
+                text-align: center;  
+                margin-bottom: 57px;     
             }
         }
     }
 
     .users {
+        padding-top: 84px;
         padding-bottom: 109px;
         h1 {
             letter-spacing: -0.1px;
@@ -779,5 +806,4 @@
     .error-holder {
         margin-bottom: 22px;
     }
-
 }

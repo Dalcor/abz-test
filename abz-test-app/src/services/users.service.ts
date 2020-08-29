@@ -14,19 +14,23 @@ export class UsersService {
   id: number;
   constructor(private http: HttpClient) { }
 
+  //get users from API from server and provide it to component
   getUsers(page, count):Observable<registrationInfo> {
     return this.http.get<registrationInfo>(baseApiUrl+ "users?page=" + page + "&count=" + count);
   }
 
+  //get positions from API from server and provide it to component
   getPositions():Observable<Positions> {
     return this.http.get<Positions>(baseApiUrl + "positions");
   }
 
-
+  //get token from API from server and provide it to component
   getToken():Observable<any> {
     return this.http.get<any>(baseApiUrl + "token");
   }
 
+/*submitting form, send post request with headers_>token, get anwser 
+and provide it to component*/
   submitForm(data: FormData, token: string) {
 
     const httpOptions = {

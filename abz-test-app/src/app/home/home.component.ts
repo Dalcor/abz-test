@@ -26,8 +26,6 @@ export class HomeComponent implements OnInit {
   modal: boolean = false;
   formData: FormData;
   signInForm: FormGroup;
-  shown: boolean;
-  isSet: boolean;
   registrationData: registrationInfo;
   c: any = null;
   photo: any;
@@ -50,41 +48,39 @@ export class HomeComponent implements OnInit {
       this.createForm();
     }
 
-  ngOnInit(): void {
+  ngOnInit(): void { //ititialization component
     if(window.document.documentElement.clientWidth < 600) {
-      this.count = 3;
+      this.count = 3; //if width low, show only 3 users
     }
     this.currentPage = 1;
     this.usersService.getUsers(this.currentPage, this.count)
     .subscribe(data => {this.users = data.users;
-      this.registrationData = data;});
+      this.registrationData = data;}); //getting users for users block
     this.usersService.getPositions()
-    .subscribe(pos => {this.positions = pos.positions;});
-    
-    this.isSet = true;
-    this.shown = false;
+    .subscribe(pos => {this.positions = pos.positions;}); //getting positions for registration form
     this.usersService.getToken().subscribe(data => {
-      this.newToken = data.token;
+      this.newToken = data.token; //get token to access to API
     });
   }
 
-  createForm() {
+  createForm() {  //creating form and validators
     this.signInForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(60), Validators.minLength(2)]],
-      email: ['vitia2282@gmail.com', [Validators.required, Validators.email]],
-      phone: ['+380935610488', [Validators.required, Validators.pattern]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern]],
       position_id: ["1", [Validators.required]], 
       photo: [null, [Validators.required]] 
     });
   }
 
   get f() { return this.signInForm.controls; }
-  // get f() { return this.signInForm.controls; }
 
-  handleClickInput(event: any) {
+  handleClickInput(event: any) { //when click on "Choose file" refresh field
     this.c = null;
   }
 
+
+//handling file input, set name to field, set size and type validators
 handleFileInput(event: any) {
     console.log(event.target.files[0].size);
     if (event.target.files && event.target.files[0]) {
@@ -108,7 +104,7 @@ handleFileInput(event: any) {
 
 }
 
-
+//show more users, +6 when width is more than 600, +3 if less
   showMore(ev) {
     this.currentPage += 1;
     this.usersService.getUsers(this.currentPage, this.count)
@@ -120,6 +116,7 @@ handleFileInput(event: any) {
     });
   }
 
+  //submitting registration form
   onSubmit(){
     this.submitted = true;
     if (this.signInForm.invalid) {
@@ -127,7 +124,7 @@ handleFileInput(event: any) {
     }
 
 
-      const formData = new FormData();
+      const formData = new FormData();//append data in formData
       this.user = this.signInForm.value;
       formData.append('name', this.user.name);
       formData.append('phone', this.user.phone);
@@ -135,9 +132,8 @@ handleFileInput(event: any) {
       formData.append('position_id', this.user.position_id);
       formData.append('photo', this.photo);
 
-        this.isSet = false;
         this.usersService.submitForm(formData, this.newToken)
-        .subscribe(data => {
+        .subscribe(data => {//if submitted add user to current users array and refresh block wuth users
             if(data.success === true) {
               this.currentPage = 1;
               this.usersService.getUsers(this.currentPage, this.count)
@@ -146,7 +142,7 @@ handleFileInput(event: any) {
               this.modal = true;
             });
             }  
-        });
+        });//reset form after submit
         this.signInForm.reset({
           name: '',
           email: '',
@@ -154,10 +150,12 @@ handleFileInput(event: any) {
           position_id: '1',
           photo: null
         });
+      this.submitted = false;
+
       }
 
 
-      closeModal() {
+      closeModal() {//close modal window after registration
         this.modal = false;
       }
 }

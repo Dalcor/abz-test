@@ -8,24 +8,42 @@
     <div class="button-holder">
         <button (click)="toggleMenu()"><img src="../../assets/images/burger.svg" alt=""></button>
     </div>
-
+    <div [ngClass]="{ 'dark-open':opened }" (click)="toggleMenu()" class="dark"></div>
    <nav class="desktop">
        <ul>
-           <li><a href="">About me</a></li>
-           <li><a href="">Relationships</a></li>
-           <li><a href="">Requirements</a></li>
-           <li><a href="">Users</a></li>
-           <li><a href="">Sign Up</a></li>
+           <li><a [ngxScrollTo]="'#destinationRef'">About me</a></li>
+           <li><a [ngxScrollTo]="'#destinationRef'">Relationships</a></li>
+           <li><a [ngxScrollTo]="'#destinationRef'">Requirements</a></li>
+           <li><a [ngxScrollTo]="'#destinationRef'">Users</a></li>
+           <li><a [ngxScrollTo]="'#destinationRef'">Sign Up</a></li>
        </ul>
    </nav>
 
    <nav [ngClass]="{ 'opened':opened }" class="mobile">
+       <div class="logo-container">
+           <img src="../../assets/images/shape.png" alt="logo">
+           <span>TESTTASK</span>
+        </div>
         <ul>
-            <li><a href="">About me</a></li>
-            <li><a href="">Relationships</a></li>
-            <li><a href="">Requirements</a></li>
-            <li><a href="">Users</a></li>
-            <li><a href="">Sign Up</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">About me</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Relationships</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Requirements</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Users</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Sign Up</a></li>
+        </ul>
+        <ul>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">How it works</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Partnership</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Help</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Leave testimonial</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Contact us</a></li>
+        </ul>
+        <ul>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Articles</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Our news</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Testimonials</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Licences</a></li>
+            <li><a (click)="toggleMenu()" [ngxScrollTo]="'#destinationRef'">Privacy Policy</a></li>
         </ul>
    </nav>
 </header>

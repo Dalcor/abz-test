@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/services/users.service';
 
 import { NgpSortModule } from "ngp-sort-pipe";
+import { ScrollToModule } from '@nicky-lenaers/ngx-scroll-to';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgpSortModule } from "ngp-sort-pipe";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgpSortModule
+    NgpSortModule,
+    ScrollToModule.forRoot()
   ],
   providers: [UsersService],
   bootstrap: [AppComponent]

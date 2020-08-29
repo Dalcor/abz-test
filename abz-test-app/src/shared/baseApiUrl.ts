@@ -1,1 +1,1 @@
-export const baseApiUrl = "https://frontend-test-assignment-api.abz.agency/api/v1/";
+export const baseApiUrl = "https://frontend-test-assignment-api.abz.agency/api/v1/";//set base url
